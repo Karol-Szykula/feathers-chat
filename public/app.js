@@ -122,3 +122,34 @@ const addMessage = message => {
         chat.scrollTop = chat.scrollHeight - chat.clientHeight;
     }
 };
+
+// Show the login page
+const showLogin = (error = {}) => {
+    if (document.querySelectorAll('.login').length) {
+        document.querySelector('.heading').insertAdjacentHTML('beforeend', `<p>There was an error: ${error.message}</p>`);
+    } else {
+        document.getElementById('app').innerHTML = loginHTML;
+    }
+};
+
+// Shows the chat page
+const showChat = async () => {
+    document.getElementById('app').innerHTML = chatHTML;
+
+    // Find the latest 25 messages. They will come with the newest first
+    // which is why we have to reverse before adding them
+    const messages = await client.service('messages').find({
+        query: {
+            $sort: { createdAt: -1 },
+            $limit: 25
+        }
+    });
+
+    // We want to show the newest message last
+    messages.data.reverse().forEach(addMessage);
+
+    // Find all users
+    const users = await client.service('users').find();
+
+    users.data.forEach(addUser);
+};
