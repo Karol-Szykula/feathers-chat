@@ -1,6 +1,6 @@
-# feathers-chat
+# feathers-chat-tutorial
 
-> Tutorial of feathers framework
+> 
 
 ## About
 
@@ -14,7 +14,7 @@ Getting up and running is as easy as 1, 2, 3.
 2. Install your dependencies
 
     ```
-    cd path/to/feathers-chat; npm install
+    cd path/to/feathers-chat-tutorial; npm install
     ```
 
 3. Start your app
